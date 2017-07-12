@@ -12,10 +12,11 @@ Polls is a simple API allowing consumers to view polls and vote in them.
 + Request (application/json)
         
         {
-            "user_name": "halzate93",
             "token": "FB_HFG425",
             "email": "halzate93@gmail.com",
             "name": "Héctor Camilo Alzate",
+            "pass": "HASH_MD5",
+            "language": "ES"
         }
 
 + Response 200 (application/json)
@@ -37,7 +38,8 @@ Polls is a simple API allowing consumers to view polls and vote in them.
             "token": "FB_HFG425",
             "email": "halzate93@gmail.com",
             "name": "Héctor Camilo Alzate",
-            "language": "ES"
+            "language": "ES",
+            "plan": "Free"
         }
         
 ### Updates the user data [PUT]
@@ -62,33 +64,69 @@ Polls is a simple API allowing consumers to view polls and vote in them.
 + Response 200 (application/json)
 
         {
-            "power_ups": 
-            {
-                "fire_balls": 3  
-            },
+            "power_ups": [
+                {
+                    "type": "fireball",
+                    "amount": 10
+                }
+            ],
             "progress":
             {
-                
+                "level": 10,
+                "experience": 2000,
+                "worlds": [
+                    {
+                        "id": "HEX123",
+                        "status": "completed",
+                        "classes": [
+                            {
+                                "id": "HEX654",
+                                "stars": 3
+                            },
+                            {
+                                "id": "HEX654",
+                                "stars": 3
+                            },
+                            {
+                                "id": "HEX654",
+                                "stars": 3
+                            }
+                        ]
+                    },
+                    {
+                        "id": "HEX123",
+                        "status": "in-progress",
+                        "classes": [
+                            {
+                                "id": "HEX654",
+                                "stars": 3
+                            }
+                        ]
+                    }
+                    
+                ]
             }
         }
         
-### Stores the progress [POST]
+## Class [/user/{id}/progress/class]
+
+### Completes a class [POST]
 
 + Request (application/json)
 
+    
         {
-            "power_ups": 
-            {
-                "fire_balls": 3  
-            },
-            "progress":
-            {
-            
+            "world_id": "Planet01",
+            "class_id": "HEX_123",
+            "stars": 3,
+            "powerup": {
+                "type": "fireball",
+                "amount": 2
             }
         }
         
 + Response 200
-        
+      
 ## Sets the user as interested in a new section [/user/{id}/interests]
 
 ### Suscribes a user [POST]
@@ -101,28 +139,34 @@ Polls is a simple API allowing consumers to view polls and vote in them.
 
 + Response 200
 
-## Describes the content of the application in worlds and stops [/content/{hash}]
+## Describes the content of the application in worlds and stops [/planets]
 
 ### Retrieves the latest version of the content [GET]
 
 + Response 200 (application/json)
 
-        {
-            "worlds": [
-                {
-                    "stops":
+        [
+            {
+                "id": "HEX123",
+                "name":"HTML",
+                "image": "planets/html",
+                "monster": "monster/cockroach",
+                "classes": [
                     {
-                        "type": "Video",
-                        "url": ""
-                    },
-                    {
-                        "type": "Text",
-                        "content": "Lorem ipsum"
-                    },
-                    {
-                        "type": "Image",
-                        "bundle_id": "code/html5/intro"
+                        "name":"Official Intro GONATIVO",
+                        "resource":{
+                            "type":"Video",
+                            "resourceJson":"{ \"seconds\": 92, \"url\": \"file:///Users/monik/Downloads/NativoApp/Assets/StreamingAssets/nativointro.mp4\", \"description\": \"And it is OUT! We are almost ready to impact an entire planet!Check out the reel, sign up for FREE and start PLAYING and LEARNING!\",\"name\": \"Official Intro GONATIVO\" }"
+                        },
+                        "game": {
+                            "type": "trivia",
+                            "gameJson": "{}",
+                            "messages": {
+                                "ok": "Nice one!",
+                                "mistake": "Remember to study html!"
+                            }
+                        }
                     }
-                }
-            ]
-        }
+                ]
+            }
+        ]
