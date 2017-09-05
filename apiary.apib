@@ -12,18 +12,18 @@ Polls is a simple API allowing consumers to view polls and vote in them.
 + Request (application/json)
         
         {
-            "token": "FB_HFG425",
             "email": "halzate93@gmail.com",
-            "name": "Héctor Camilo Alzate",
-            "pass": "HASH_MD5",
+            "name": "Héctor Camilo",
+            "last_name": "Alzate Ramírez",
+            "password": "Password",
             "language": "ES"
         }
 
 + Response 200 (application/json)
 
         {
-            "id": "DB_ASDFNKLE23",
-            "already_created": true
+            "token": "TK_ASDFNKLE23",
+            "id": "DB_ASDFNKLE23"
         }
 
 
@@ -31,31 +31,36 @@ Polls is a simple API allowing consumers to view polls and vote in them.
 
 ### Gets the user data [GET]
 
++ Request (application/json)
+
 + Response 200 (application/json)
 
         {
-            "user_name": "halzate93",
-            "token": "FB_HFG425",
+            "username": "halzate93",
             "email": "halzate93@gmail.com",
-            "name": "Héctor Camilo Alzate",
-            "language": "ES",
-            "plan": "Free"
+            "name": "Héctor Camilo",
+            "last_name": "Alzate Ramírez",
+            "points": 100,
+            "level": 5
         }
-        
-### Updates the user data [PUT]
+
+## Login [/login]
+
+### Authenticates the user and retrieves id and session token [POST]
 
 + Request (application/json)
 
         {
-            "user_name": "halzate93",
-            "token": "FB_HFG425",
-            "email": "halzate93@gmail.com",
-            "name": "Héctor Camilo Alzate",
-            "language": "ES"
+            "username": "halzate93",
+            "password": "Password"
         }
-        
-+ Response 200
 
++ Response 200 (application json)
+
+        {
+            "token": "TK_ASDFNKLE23",
+            "id": "DB_ASDFNKLE23"
+        }
 
 ## Completed sections in the game [/users/{id}/progress]
 
@@ -127,17 +132,6 @@ Polls is a simple API allowing consumers to view polls and vote in them.
         
 + Response 200
       
-## Sets the user as interested in a new section [/user/{id}/interests]
-
-### Suscribes a user [POST]
-
-+ Request (application/json)
-
-        {
-            "section": "shop"
-        }
-
-+ Response 200
 
 ## Describes the content of the application in worlds and stops [/planets]
 
